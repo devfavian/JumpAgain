@@ -1,11 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://cdf02wuxbbyrl"]
+[gd_scene load_steps=14 format=3 uid="uid://cdf02wuxbbyrl"]
 
 [ext_resource type="Texture2D" uid="uid://bb4gu2cib3pcm" path="res://assets/player.png" id="1_p0vlq"]
 [ext_resource type="Script" uid="uid://2il3uupgpna6" path="res://scripts/player.gd" id="1_v6fml"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6eyey"]
-atlas = ExtResource("1_p0vlq")
-region = Rect2(0, 96, 33, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d3wef"]
 atlas = ExtResource("1_p0vlq")
@@ -51,9 +47,6 @@ region = Rect2(165, 33, 33, 33)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6eyey")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_d3wef")
 }, {
 "duration": 1.0,
@@ -98,10 +91,6 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d3wef"]
-radius = 7.0
-height = 20.0
-
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_v6fml")
 
@@ -111,8 +100,11 @@ scale = Vector2(1, 1.03125)
 sprite_frames = SubResource("SpriteFrames_6eyey")
 animation = &"down"
 autoplay = "run"
-frame_progress = 0.534116
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(74, 51)
-shape = SubResource("CapsuleShape2D_d3wef")
+[node name="CollisionUp" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(67, 64, 67, 62, 68, 62, 68, 60, 67, 60, 67, 59, 66, 59, 66, 56, 65, 56, 65, 54, 64, 54, 64, 52, 65, 52, 65, 50, 66, 50, 66, 48, 67, 48, 67, 49, 68, 49, 69, 49, 69, 46, 68, 46, 68, 42, 71, 42, 71, 43, 73, 43, 73, 44, 78, 44, 78, 43, 79, 43, 79, 42, 80, 42, 81, 43, 81, 54, 80, 54, 79, 54, 79, 55, 79, 56, 80, 56, 80, 57, 81, 57, 81, 58, 80, 59, 79, 59, 79, 58, 77, 58, 77, 62, 78, 62, 78, 64, 75, 64, 75, 63, 74, 63, 74, 61, 71, 61, 71, 63, 70, 63, 70, 64)
+
+[node name="CollisionCrouch" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(67, 64, 67, 62, 68, 62, 68, 59, 67, 58, 67, 56, 68, 56, 68, 52, 67, 52, 67, 49, 66, 49, 66, 45, 69, 45, 72, 48, 73, 48, 74, 47, 76, 47, 76, 50, 81, 50, 81, 47, 82, 47, 84, 49, 84, 61, 82, 61, 82, 62, 83, 62, 83, 64, 80, 64, 80, 62, 78, 63, 78, 64, 72, 64, 72, 63, 70, 63, 70, 64)
