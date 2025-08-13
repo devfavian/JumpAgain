@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://ben5hauunppt4"]
+
+[ext_resource type="Script" uid="uid://c3g10e8lvl118" path="res://scripts/enemy.gd" id="1_55jtl"]
+[ext_resource type="Texture2D" uid="uid://bjat5hblss3hh" path="res://assets/frog-idle.png" id="2_mpr68"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ft8do"]
+atlas = ExtResource("2_mpr68")
+region = Rect2(0, 0, 35, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5wwv6"]
+atlas = ExtResource("2_mpr68")
+region = Rect2(35, 0, 35, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1vja8"]
+atlas = ExtResource("2_mpr68")
+region = Rect2(70, 0, 35, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iwav8"]
+atlas = ExtResource("2_mpr68")
+region = Rect2(105, 0, 35, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1i2q2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ft8do")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5wwv6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1vja8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iwav8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qyo2l"]
+radius = 8.99889
+height = 25.9968
+
+[node name="Frog" type="CharacterBody2D"]
+script = ExtResource("1_55jtl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_1i2q2")
+autoplay = "default"
+frame_progress = 0.762898
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 2)
+rotation = 1.55509
+shape = SubResource("CapsuleShape2D_qyo2l")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-2.27374e-13, 3)
+scale = Vector2(1.45, 1.2)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
