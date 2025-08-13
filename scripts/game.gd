@@ -18,6 +18,8 @@ func _on_enemy_timer_timeout() -> void:
 	enemy_instance.position = Vector2(152, 165)
 	if enemy_instance.name == "Eagle":
 		enemy_instance.position.y -= 25
+	elif enemy_instance.name == "Vulture":
+		enemy_instance.position.y -= 40
 	add_child(enemy_instance)
 	pass # Replace with function body.
 

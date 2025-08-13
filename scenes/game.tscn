@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://ia6qnwfeqvmb"]
+[gd_scene load_steps=15 format=4 uid="uid://ia6qnwfeqvmb"]
 
 [ext_resource type="Script" uid="uid://btpe6gu2wdr21" path="res://scripts/game.gd" id="1_p57ef"]
 [ext_resource type="Texture2D" uid="uid://c1ser2w6ndjbb" path="res://assets/background.png" id="1_uwrxv"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cbodjgb30gytk" path="res://scenes/eagle.tscn" id="2_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://cdf02wuxbbyrl" path="res://scenes/Player.tscn" id="2_yqjtg"]
 [ext_resource type="Texture2D" uid="uid://cfvlil6jgek77" path="res://assets/tileset.png" id="3_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://daeci7vui1hbi" path="res://scenes/vulture.tscn" id="4_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://ben5hauunppt4" path="res://scenes/frog.tscn" id="5_iywne"]
 [ext_resource type="FontFile" uid="uid://1ulwyhecvyxq" path="res://assets/PixelOperator8.ttf" id="8_gee14"]
 
@@ -156,7 +157,7 @@ sources/0 = SubResource("TileSetAtlasSource_lbhrr")
 
 [node name="Game" type="Node"]
 script = ExtResource("1_p57ef")
-enemy_scenes = Array[PackedScene]([ExtResource("2_u5sy4"), ExtResource("5_iywne")])
+enemy_scenes = Array[PackedScene]([ExtResource("2_u5sy4"), ExtResource("5_iywne"), ExtResource("4_0tnpc")])
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamOggVorbis_yqjtg")
