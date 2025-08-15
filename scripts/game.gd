@@ -2,15 +2,20 @@ extends Node
 
 @export var enemy_scenes: Array[PackedScene]
 var score = 0
+var is_pause = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	$HUD/PauseMenu.visible = false # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if Input.is_action_just_pressed("esc"):
+		if not is_pause:
+			$HUD/PauseMenu.visible = true
+			is_pause = true
+			get_tree().paused = true
 
 func _on_enemy_timer_timeout() -> void:
 	var enemy_scene = enemy_scenes.pick_random()
@@ -46,3 +51,15 @@ func _on_score_timer_timeout() -> void:
 
 func _on_speed_increase_timeout() -> void:
 	Engine.time_scale += 0.01
+
+
+func _on_resume_pressed() -> void:
+	$HUD/PauseMenu.visible = false
+	is_pause = false
+	get_tree().paused = false
+
+func _on_options_pressed() -> void: #to-do
+	pass # Replace with function body.
+
+func _on_exit_pressed() -> void:
+	get_tree().quit()

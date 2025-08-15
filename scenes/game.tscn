@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://ia6qnwfeqvmb"]
+[gd_scene load_steps=19 format=4 uid="uid://ia6qnwfeqvmb"]
 
 [ext_resource type="Script" uid="uid://btpe6gu2wdr21" path="res://scripts/game.gd" id="1_p57ef"]
 [ext_resource type="Texture2D" uid="uid://c1ser2w6ndjbb" path="res://assets/background.png" id="1_uwrxv"]
@@ -155,11 +155,41 @@ texture = ExtResource("3_lnu2h")
 [sub_resource type="TileSet" id="TileSet_iywne"]
 sources/0 = SubResource("TileSetAtlasSource_lbhrr")
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0tnpc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vtaks"]
+bg_color = Color(0.616296, 0.553469, 0.289615, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 1
+shadow_offset = Vector2(0, 3.41)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kvpfn"]
+bg_color = Color(0.517729, 0.462552, 0.230097, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 1
+shadow_offset = Vector2(0, 3.41)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0tnpc"]
+bg_color = Color(0.711041, 0.642892, 0.35788, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 1
+shadow_offset = Vector2(0, 3.41)
+
 [node name="Game" type="Node"]
 script = ExtResource("1_p57ef")
 enemy_scenes = Array[PackedScene]([ExtResource("2_u5sy4"), ExtResource("5_iywne"), ExtResource("4_0tnpc")])
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = SubResource("AudioStreamOggVorbis_yqjtg")
 autoplay = true
 
@@ -199,6 +229,90 @@ tile_set = SubResource("TileSet_iywne")
 autostart = true
 
 [node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" type="Control" parent="HUD"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.5
+offset_top = -67.0
+offset_right = 45.5
+offset_bottom = 67.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="title" type="Label" parent="HUD/PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = -52.0
+offset_right = 67.0
+offset_bottom = -36.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.962202, 0.676523, 1.15514e-06, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_gee14")
+theme_override_font_sizes/font_size = 12
+text = "Jump Again"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -38.5
+offset_top = -24.0
+offset_right = 38.5
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="resume" type="Button" parent="HUD/PauseMenu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("8_gee14")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0tnpc")
+theme_override_styles/hover = SubResource("StyleBoxFlat_vtaks")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_kvpfn")
+theme_override_styles/normal = SubResource("StyleBoxFlat_0tnpc")
+text = "Resume"
+
+[node name="options" type="Button" parent="HUD/PauseMenu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("8_gee14")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0tnpc")
+theme_override_styles/hover = SubResource("StyleBoxFlat_vtaks")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_kvpfn")
+theme_override_styles/normal = SubResource("StyleBoxFlat_0tnpc")
+text = "Options"
+
+[node name="exit" type="Button" parent="HUD/PauseMenu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("8_gee14")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0tnpc")
+theme_override_styles/hover = SubResource("StyleBoxFlat_vtaks")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_kvpfn")
+theme_override_styles/normal = SubResource("StyleBoxFlat_0tnpc")
+text = "Exit"
 
 [node name="Score" type="Label" parent="HUD"]
 offset_right = 40.0
@@ -252,5 +366,8 @@ autostart = true
 
 [connection signal="hit" from="Player" to="." method="_on_player_hit"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
+[connection signal="pressed" from="HUD/PauseMenu/VBoxContainer/resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="HUD/PauseMenu/VBoxContainer/options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="HUD/PauseMenu/VBoxContainer/exit" to="." method="_on_exit_pressed"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
 [connection signal="timeout" from="SpeedIncrease" to="." method="_on_speed_increase_timeout"]
