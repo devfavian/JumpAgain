@@ -3,15 +3,17 @@ extends Node
 @export var enemy_scenes: Array[PackedScene]
 var score = 0
 var is_pause = false
+var gameover = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$HUD/PauseMenu.visible = false # Replace with function body.
+	gameover = false
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("esc"):
+	if Input.is_action_just_pressed("esc") and not gameover:
 		if not is_pause:
 			$HUD/PauseMenu.visible = true
 			is_pause = true
@@ -30,6 +32,7 @@ func _on_enemy_timer_timeout() -> void:
 
 
 func _on_player_hit() -> void:
+	gameover = true
 	$ScoreTimer.stop()
 	$HUD/Score.hide()
 	$HUD/FinalMessage.show()
@@ -40,7 +43,6 @@ func _on_player_hit() -> void:
 	await get_tree().create_timer(3 * Engine.time_scale).timeout
 	Engine.time_scale = 1
 	get_tree().reload_current_scene()
-	
 	
 
 
