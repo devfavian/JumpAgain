@@ -14,6 +14,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("esc") and not gameover:
+		$HUD/PauseMenu/Options.visible = false
 		if not is_pause:
 			$HUD/PauseMenu.visible = true
 			is_pause = true
@@ -60,8 +61,14 @@ func _on_resume_pressed() -> void:
 	is_pause = false
 	get_tree().paused = false
 
-func _on_options_pressed() -> void: #to-do
-	pass # Replace with function body.
+func _on_options_pressed() -> void:
+	$HUD/PauseMenu/MainButtons.visible = false
+	$HUD/PauseMenu/Options.visible = true
 
 func _on_exit_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_back_options_pressed() -> void:
+	$HUD/PauseMenu/Options.visible = false
+	$HUD/PauseMenu/MainButtons.visible = true
